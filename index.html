@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>colorgram 립 컬러 믹서 게임</title>
+  <title>colorgram promotion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -344,15 +344,14 @@
   <div class="game-root">
     <div class="brand-bar">
       <div>
-        <div class="brand-title">OLIVE YOUNG × colorgram 립 컬러 믹서</div>
-        <div class="brand-sub">기본 팔레트만으로 신상 립 컬러를 정확히 조합해보면 교환권 기회!</div>
+        <div class="brand-title">ColorGram</div>
+        <div class="brand-sub">컬러를 정확히 조색하신 분께는 제품 교환권을 드립니다!</div>
       </div>
       <div class="oy-pill">OLIVE YOUNG PLAY</div>
     </div>
 
     <div class="subtitle">
-      6가지 colorgram 가상 립 컬러 중 하나를 선택하고,<br />
-      화이트 · 블랙 · 레드 · 핑크 · 브라운 팔레트로 목표 컬러에 얼마나 가까워질 수 있는지 도전해보세요.
+      6가지 팔레트로 희망하는 제품의 컬러 조색에 도전해보세요
     </div>
 
     <div class="layout-row">
@@ -365,9 +364,9 @@
         <div class="swatch-row" style="margin-bottom: 8px;">
           <div class="swatch" id="target-swatch"></div>
           <div>
-            <div class="panel-text-main" id="target-name">색상을 선택해주세요</div>
+            <div class="panel-text-main" id="target-name">희망하는 컬러 옵션을 선택해주세요</div>
             <div class="panel-text-sub" id="target-rgb">RGB(-, -, -)</div>
-            <div class="panel-small">아래에서 6가지 컬러 옵션 중 하나를 선택하면 목표 색상으로 설정됩니다.</div>
+    
           </div>
         </div>
         <div class="shade-list" id="shade-list"></div>
@@ -396,8 +395,6 @@
     <!-- 팔레트 -->
     <div class="palette-panel">
       <div class="palette-header">
-        <span>🎨 기본 팔레트 – 버튼을 클릭하면 해당 색이 한 방울씩 추가됩니다.</span>
-        <span style="font-size:11px; color:#888;">섞을수록 한 방울의 영향력은 작아집니다.</span>
       </div>
       <div class="palette-grid" id="palette"></div>
     </div>
@@ -409,9 +406,6 @@
     </div>
 
     <div class="helper-text">
-      목표 색상과 현재 조합의 RGB가 얼마나 가까운지를 기준으로 유사도를 계산해요.
-      <br />
-      특정 기준 이상으로 가까워지면 가상의 “교환권 당첨” 배지를 띄울 수 있습니다.
     </div>
 
     <!-- 결과 패널 -->
@@ -627,7 +621,7 @@
       if (success) {
         resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
         resultNoteEl.textContent =
-          "실제 컬러그램 립과 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기에 교환권 코드 또는 팝업을 띄울 수 있습니다.";
+          "실제 컬러그램 립과 거의 구분이 안 될 정도의 조합이에요.";
       } else {
         resultTextEl.innerHTML = `조금 더 미세 조정이 필요해요. <span class="badge-lose">아쉬운 실패</span>`;
         resultNoteEl.textContent =
