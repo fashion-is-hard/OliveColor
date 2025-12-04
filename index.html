@@ -100,7 +100,7 @@
 
     .product-thumb-wrapper {
       width: 130px;
-      height: 130px;          /* 1:1 비율, 더 크게 */
+      height: 130px;          /* 1:1 비율, 크게 */
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid #e0e0e0;
@@ -158,14 +158,6 @@
       gap: 10px;
       margin-bottom: 12px;
       flex-wrap: wrap;
-    }
-
-    .shade-bar-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #333;
-      min-width: 120px;
-      padding-top: 2px;
     }
 
     .shade-list {
@@ -426,6 +418,166 @@
       margin-left: 4px;
     }
 
+    /* === 기프티콘 쿠폰 오버레이 === */
+    .coupon-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      font-family: inherit;
+    }
+
+    .coupon-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .coupon-card {
+      width: 320px;
+      max-width: 90vw;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      overflow: hidden;
+      border: 1px solid #f0f0f0;
+    }
+
+    .coupon-card-header {
+      background: linear-gradient(135deg, #111, #333);
+      color: #f5ffb0;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .coupon-card-header-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .coupon-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.9;
+    }
+
+    .coupon-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .coupon-logo-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid #f5ffb0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .coupon-card-body {
+      padding: 12px 14px 10px;
+    }
+
+    .coupon-product {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .coupon-product span {
+      color: #ff5c8a;
+    }
+
+    .coupon-desc {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .coupon-code-box {
+      margin: 6px 0 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #f8f8f8;
+      border: 1px dashed #ccc;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .coupon-code-label {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .coupon-code-value {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .coupon-barcode {
+      height: 32px;
+      margin: 4px 0 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        #111,
+        #111 2px,
+        #fff 2px,
+        #fff 4px
+      );
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .coupon-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #999;
+    }
+
+    .coupon-btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .coupon-btn {
+      flex: 1;
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .coupon-btn-primary {
+      background: #111;
+      color: #f5ffb0;
+    }
+
+    .coupon-btn-secondary {
+      background: #f3f3f3;
+      color: #444;
+      border: 1px solid #e0e0e0;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 10px;
@@ -446,169 +598,6 @@
         width: 110px;
         height: 110px;
       }
-      .shade-bar-label {
-        min-width: 100px;
-      }
-      /* === 기프티콘 쿠폰 오버레이 === */
-.coupon-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.45);
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  font-family: inherit;
-}
-
-.coupon-overlay.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.coupon-card {
-  width: 320px;
-  max-width: 90vw;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-  overflow: hidden;
-  border: 1px solid #f0f0f0;
-}
-
-.coupon-card-header {
-  background: linear-gradient(135deg, #111, #333);
-  color: #f5ffb0;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.coupon-card-header-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.coupon-tag {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  opacity: 0.9;
-}
-
-.coupon-title {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.coupon-logo-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  border: 2px solid #f5ffb0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.coupon-card-body {
-  padding: 12px 14px 10px;
-}
-
-.coupon-product {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.coupon-product span {
-  color: #ff5c8a;
-}
-
-.coupon-desc {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 8px;
-}
-
-.coupon-code-box {
-  margin: 6px 0 8px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #f8f8f8;
-  border: 1px dashed #ccc;
-  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.coupon-code-label {
-  font-size: 11px;
-  color: #777;
-}
-
-.coupon-code-value {
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.coupon-barcode {
-  height: 32px;
-  margin: 4px 0 6px;
-  background: repeating-linear-gradient(
-    90deg,
-    #111,
-    #111 2px,
-    #fff 2px,
-    #fff 4px
-  );
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.coupon-footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 10px;
-  color: #999;
-}
-
-.coupon-btn-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.coupon-btn {
-  flex: 1;
-  font-size: 12px;
-  border-radius: 999px;
-  padding: 7px 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.coupon-btn-primary {
-  background: #111;
-  color: #f5ffb0;
-}
-
-.coupon-btn-secondary {
-  background: #f3f3f3;
-  color: #444;
-  border: 1px solid #e0e0e0;
-}
-
     }
   </style>
 </head>
@@ -633,18 +622,18 @@
       </div>
       <div class="product-copy">
         <div class="product-tagline">NEW · 올리브영 단독 선런칭</div>
-        <div class="product-name">colorgram <span>무드필터 글로우 틴트</span> </div>
+        <div class="product-name">colorgram <span>무드필터 글로우 틴트</span></div>
         <div class="product-desc">
-          혈색과 잘 어우러지는 톤다운 핑크 계열로 느좋 무드를 연출할 수 있는 틴트!
+          혈색과 잘 어우러지는 톤다운 핑크 계열로 부드러운 무드를 연출할 수 있는 틴트!
         </div>
         <div class="product-meta">
-          총 6가지의 컬러 옵션!
+          총 6가지 컬러 옵션 중 하나를 골라 색을 맞춰보세요.
         </div>
       </div>
     </div>
 
     <div class="subtitle">
-      원하는 컬러 옵션을 선택후 게임을 시작해주세요!
+      원하는 컬러 옵션을 선택 후 게임을 시작해주세요!
     </div>
 
     <!-- 목표 컬러 선택 바 (옵션 선택 전용) -->
@@ -653,7 +642,7 @@
     </div>
 
     <div class="layout-row">
-      <!-- 목표 컬러 패널 (옵션 선택은 위 바에서, 여기엔 결과만 표시) -->
+      <!-- 목표 컬러 패널 -->
       <div class="panel">
         <div class="panel-header">
           <span>목표 색상</span>
@@ -704,7 +693,7 @@
     </div>
 
     <div class="helper-text">
-      
+      목표 색상과 현재 조합의 RGB가 얼마나 가까운지를 기준으로 유사도를 계산합니다.
     </div>
 
     <!-- 결과 패널 -->
@@ -717,18 +706,63 @@
     </div>
   </div>
 
+  <!-- 가상 기프티콘 쿠폰 오버레이 -->
+  <div class="coupon-overlay" id="coupon-overlay">
+    <div class="coupon-card">
+      <div class="coupon-card-header">
+        <div class="coupon-card-header-left">
+          <span class="coupon-tag">GIFTICON · COLORGRAM</span>
+          <span class="coupon-title">무드필터 글로우 틴트 교환권</span>
+        </div>
+        <div class="coupon-logo-dot">OY</div>
+      </div>
+      <div class="coupon-card-body">
+        <div class="coupon-product">
+          OLIVE YOUNG × colorgram <span>무드필터 글로우 틴트</span>
+        </div>
+        <div class="coupon-desc">
+          선택하신 목표 립 컬러와 95% 이상 일치!<br />
+          실제 이벤트라면 이 화면을 기준으로 교환권이 지급됩니다.
+        </div>
+
+        <div class="coupon-code-box">
+          <div>
+            <div class="coupon-code-label">기프티콘 번호</div>
+            <div class="coupon-code-value" id="coupon-code">OYCG-0000-0000</div>
+          </div>
+        </div>
+
+        <div class="coupon-barcode"></div>
+
+        <div class="coupon-footer-row">
+          <span>발급처 · OLIVE YOUNG PLAY</span>
+          <span id="coupon-date">오늘 발급</span>
+        </div>
+
+        <div class="coupon-btn-row">
+          <button class="coupon-btn coupon-btn-primary" data-close-coupon>
+            쿠폰 저장하기
+          </button>
+          <button class="coupon-btn coupon-btn-secondary" data-close-coupon>
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // === 1. 목표 립 컬러 6가지 ===
     const SHADES = [
-      { id: "mlbb_rose",   name: "01 MLBB 로즈",    rgb: [194, 91, 99] },   // 로즈 MLBB
-      { id: "coral_punch", name: "02 코랄 펀치",    rgb: [255, 112, 98] }, // 코랄
+      { id: "mlbb_rose",   name: "01 MLBB 로즈",    rgb: [194, 91, 99] },
+      { id: "coral_punch", name: "02 코랄 펀치",    rgb: [255, 112, 98] },
       { id: "brick_mauve", name: "03 브릭 모브",    rgb: [162, 80, 82] },
       { id: "nude_beige",  name: "04 누드 베이지",  rgb: [203, 152, 120] },
       { id: "cherry_red",  name: "05 체리 레드",    rgb: [210, 40, 60] },
       { id: "dry_rose",    name: "06 말린 장미",    rgb: [175, 102, 108] }
     ];
 
-    // === 2. 기본 팔레트 (화이트/블랙/레드/핑크/브라운) ===
+    // === 2. 기본 팔레트 ===
     const PALETTE = [
       { id: "white", name: "소프트 화이트",  rgb: [250, 250, 250] },
       { id: "black", name: "딥 블랙",        rgb: [10, 10, 10] },
@@ -756,13 +790,30 @@
     const resultScoreEl = document.getElementById("result-score");
     const resultTextEl = document.getElementById("result-text");
     const resultNoteEl = document.getElementById("result-note");
-        const couponOverlay = document.getElementById("coupon-overlay");
+
+    const couponOverlay = document.getElementById("coupon-overlay");
     const couponCodeEl = document.getElementById("coupon-code");
     const couponDateEl = document.getElementById("coupon-date");
     const couponCloseButtons = document.querySelectorAll("[data-close-coupon]");
 
+    // === 상태 ===
+    let selectedShade = null;
+    let drops = []; // { rgb, paletteId }
+    let mixedColor = [0,0,0];
+
+    // === 유틸 ===
+    const rgbCss = ([r,g,b]) => `rgb(${r}, ${g}, ${b})`;
+    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+
+    function colorDistance(c1, c2) {
+      const dr = c1[0]-c2[0];
+      const dg = c1[1]-c2[1];
+      const db = c1[2]-c2[2];
+      return Math.sqrt(dr*dr + dg*dg + db*db);
+    }
+
+    // === 쿠폰 기능 ===
     function generateCouponCode() {
-      // 간단한 랜덤 코드 생성 (예: OYCG-XXXX-YYYY)
       const rand = () => Math.floor(1000 + Math.random() * 9000);
       return `OYCG-${rand()}-${rand()}`;
     }
@@ -770,7 +821,6 @@
     function showCoupon() {
       couponCodeEl.textContent = generateCouponCode();
 
-      // 간단한 날짜 텍스트 (오늘 발급)
       const now = new Date();
       const y = now.getFullYear();
       const m = String(now.getMonth() + 1).padStart(2, "0");
@@ -788,29 +838,9 @@
       btn.addEventListener("click", hideCoupon);
     });
 
-    // 오버레이 배경 클릭 시 닫기
     couponOverlay.addEventListener("click", (e) => {
-      if (e.target === couponOverlay) {
-        hideCoupon();
-      }
+      if (e.target === couponOverlay) hideCoupon();
     });
-
-
-    // === 상태 ===
-    let selectedShade = null;
-    let drops = []; // { rgb, paletteId }
-    let mixedColor = [0,0,0];
-
-    // === 유틸 ===
-    const rgbCss = ([r,g,b]) => `rgb(${r}, ${g}, ${b})`;
-    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
-
-    function colorDistance(c1, c2) {
-      const dr = c1[0]-c2[0];
-      const dg = c1[1]-c2[1];
-      const db = c1[2]-c2[2];
-      return Math.sqrt(dr*dr + dg*dg + db*db);
-    }
 
     // === 목표 색상 렌더링 ===
     function renderShadeOptions() {
@@ -851,6 +881,7 @@
       });
 
       resultPanelEl.style.display = "none";
+      hideCoupon();
     }
 
     // === 팔레트 렌더링 ===
@@ -898,6 +929,7 @@
       recalcMixedColor();
       renderPalette();
       resultPanelEl.style.display = "none";
+      hideCoupon();
     }
 
     // === 믹스 색 계산 ===
@@ -933,7 +965,6 @@
     }
 
     // === 결과 확인 ===
-        // === 결과 확인 ===
     function checkResult() {
       if (!selectedShade) {
         alert("먼저 목표 색상을 선택해주세요.");
@@ -952,46 +983,18 @@
       resultScoreEl.textContent = score + "%";
 
       // 교환권 기준 (예: 95% 이상이면 성공)
-      const success = score >= 95;
-
-      if (success) {
-        resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
-        resultNoteEl.textContent =
-          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기서 교환권 코드 또는 마이쿠폰 지급 안내를 노출할 수 있습니다.";
-
-        // ✅ 교환권 쿠폰 오버레이 띄우기
-        showCoupon();
-      } else {
-        resultTextEl.innerHTML = `조금 더 미세 조정이 필요해요. <span class="badge-lose">아쉬운 실패</span>`;
-        resultNoteEl.textContent =
-          "화이트/블랙으로 명도를 조절하거나, 레드·핑크·브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
-
-        // 실패 시에는 쿠폰 숨김 보장
-        hideCoupon();
-      }
-
-      resultPanelEl.style.display = "block";
-    }
-
-
-      const dist = colorDistance(selectedShade.rgb, mixedColor);
-      const maxDist = Math.sqrt(255*255*3); // 이론상 최대 거리
-      let score = Math.round(100 - (dist / maxDist) * 100);
-      score = clamp(score, 0, 100);
-
-      resultScoreEl.textContent = score + "%";
-
-      // 교환권 기준 (예: 98% 이상이면 성공)
       const success = score >= 98;
 
       if (success) {
         resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
         resultNoteEl.textContent =
-          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요.";
+          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기서 교환권 코드 또는 마이쿠폰 지급 안내를 노출할 수 있습니다.";
+        showCoupon();
       } else {
         resultTextEl.innerHTML = `다시 도전해보세요 <span class="badge-lose">아쉬운 실패</span>`;
         resultNoteEl.textContent =
           "화이트/블랙으로 명도를 조절하거나, 레드·핑크·브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
+        hideCoupon();
       }
 
       resultPanelEl.style.display = "block";
@@ -1004,6 +1007,7 @@
       recalcMixedColor();
       renderPalette();
       resultPanelEl.style.display = "none";
+      hideCoupon();
     }
 
     // === 초기 실행 ===
@@ -1013,52 +1017,6 @@
 
     btnCheck.addEventListener("click", checkResult);
     btnReset.addEventListener("click", resetAll);
-    
   </script>
-    <!-- 가상 기프티콘 쿠폰 오버레이 -->
-  <div class="coupon-overlay" id="coupon-overlay">
-    <div class="coupon-card">
-      <div class="coupon-card-header">
-        <div class="coupon-card-header-left">
-          <span class="coupon-tag">GIFTICON · COLORGRAM</span>
-          <span class="coupon-title">무드필터 글로우 틴트 교환권</span>
-        </div>
-        <div class="coupon-logo-dot">OY</div>
-      </div>
-      <div class="coupon-card-body">
-        <div class="coupon-product">
-          OLIVE YOUNG × colorgram <span>무드필터 글로우 틴트</span>
-        </div>
-        <div class="coupon-desc">
-          선택하신 목표 립 컬러와 95% 이상 일치!<br />
-          실제 이벤트라면 이 화면을 기준으로 교환권이 지급됩니다.
-        </div>
-
-        <div class="coupon-code-box">
-          <div>
-            <div class="coupon-code-label">기프티콘 번호</div>
-            <div class="coupon-code-value" id="coupon-code">OYCG-0000-0000</div>
-          </div>
-        </div>
-
-        <div class="coupon-barcode"></div>
-
-        <div class="coupon-footer-row">
-          <span>발급처 · OLIVE YOUNG PLAY</span>
-          <span id="coupon-date">오늘 발급</span>
-        </div>
-
-        <div class="coupon-btn-row">
-          <button class="coupon-btn coupon-btn-primary" data-close-coupon>
-            쿠폰 저장하기
-          </button>
-          <button class="coupon-btn coupon-btn-secondary" data-close-coupon>
-            닫기
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </body>
 </html>
