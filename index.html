@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>OLIVE YOUNG promotion</title>
+  <title>OLIVE YOUNG × colorgram 립 컬러 믹서 게임</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -17,7 +17,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #82DC28;
+      background: #f7f7f7;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #222;
     }
@@ -435,7 +435,7 @@
       <div class="brand-left">
         <img src="logo.png" alt="OLIVE YOUNG 로고" class="oy-logo" />
         <div class="brand-title-block">
-          <div class="brand-title">OLIVE YOUNG × colorgram 무드필터 글로우 틴트 출시 기념 이벤트!</div>
+          <div class="brand-title">OLIVE YOUNG × colorgram 립 컬러 믹서</div>
           <div class="brand-sub">기본 팔레트만으로 신상 립 컬러를 정확히 조합하면 교환권 기회!</div>
         </div>
       </div>
@@ -446,7 +446,36 @@
     <div class="product-hero">
       <div class="product-thumb-wrapper">
         <!-- 1:1 썸네일 -->
-        <img src="thumb.png" alt="colorgram 무드필터 글로우 틴트 썸네일" class="product-thumb-i션을 선택해주세요</div>
+        <img src="thumb.png" alt="colorgram 무드필터 글로우 틴트 썸네일" class="product-thumb-img" />
+      </div>
+      <div class="product-copy">
+        <div class="product-tagline">NEW · 올리브영 단독 선런칭</div>
+        <div class="product-name">colorgram <span>무드필터 글로우 틴트</span> · 01 올리브 핑크 필터</div>
+        <div class="product-desc">
+          올리브빛이 살짝 감도는 핑크 MLBB. 내 입술 톤에 맞춰 자연스럽게 물드는 글로우 틴트 컬러를 직접 조합해 보세요.
+        </div>
+        <div class="product-meta">
+          목표 립 컬러를 정확히 재현하면, 컬러그램 신제품 교환권을 받는다는 컨셉의 미니 게임입니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="subtitle">
+      6가지 colorgram 가상 립 컬러 중 하나를 선택하고,<br />
+      화이트 · 블랙 · 레드 · 핑크 · 브라운 팔레트로 목표 컬러에 얼마나 가까워질 수 있는지 도전해보세요.
+    </div>
+
+    <div class="layout-row">
+      <!-- 목표 컬러 패널 -->
+      <div class="panel">
+        <div class="panel-header">
+          <span>목표 색상 선택</span>
+          <span class="panel-tag target">Target Shade</span>
+        </div>
+        <div class="swatch-row" style="margin-bottom: 8px;">
+          <div class="swatch" id="target-swatch"></div>
+          <div>
+            <div class="panel-text-main" id="target-name">색상을 선택해주세요</div>
             <div class="panel-text-sub" id="target-rgb">RGB(-, -, -)</div>
             <div class="panel-small">아래에서 6가지 컬러 옵션 중 하나를 선택하면 목표 색상으로 설정됩니다.</div>
           </div>
@@ -477,7 +506,8 @@
     <!-- 팔레트 -->
     <div class="palette-panel">
       <div class="palette-header">
-        <span>버튼을 클릭하면 해당 색이 한 방울씩 추가됩니다.</span>
+        <span>🎨 기본 팔레트 – 버튼을 클릭하면 해당 색이 한 방울씩 추가됩니다.</span>
+        <span style="font-size:11px; color:#888;">섞을수록 한 방울의 영향력은 작아집니다.</span>
       </div>
       <div class="palette-grid" id="palette"></div>
     </div>
@@ -488,6 +518,11 @@
       <button class="btn-secondary" id="btn-reset">다시 하기</button>
     </div>
 
+    <div class="helper-text">
+      목표 색상과 현재 조합의 RGB가 얼마나 가까운지를 기준으로 유사도를 계산해요.
+      <br />
+      특정 기준 이상으로 가까워지면 가상의 “교환권 당첨” 배지를 띄울 수 있습니다.
+    </div>
 
     <!-- 결과 패널 -->
     <div class="result-panel" id="result-panel">
@@ -699,9 +734,9 @@
       if (success) {
         resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
         resultNoteEl.textContent =
-          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요.";
+          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기서 교환권 코드 또는 마이쿠폰 지급 안내를 노출할 수 있습니다.";
       } else {
-        resultTextEl.innerHTML = `아쉽지만 실패했어요 <span class="badge-lose">재도전 해보세요</span>`;
+        resultTextEl.innerHTML = `조금 더 미세 조정이 필요해요. <span class="badge-lose">아쉬운 실패</span>`;
         resultNoteEl.textContent =
           "화이트/블랙으로 명도를 조절하거나, 레드·핑크·브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
       }
