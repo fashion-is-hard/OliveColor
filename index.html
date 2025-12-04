@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>OLIVE YOUNG × colorgram 립 컬러 믹서 게임</title>
+  <title>OLIVE YOUNG Promotion Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
@@ -449,6 +449,166 @@
       .shade-bar-label {
         min-width: 100px;
       }
+      /* === 기프티콘 쿠폰 오버레이 === */
+.coupon-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+}
+
+.coupon-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.coupon-card {
+  width: 320px;
+  max-width: 90vw;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.coupon-card-header {
+  background: linear-gradient(135deg, #111, #333);
+  color: #f5ffb0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coupon-card-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.9;
+}
+
+.coupon-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.coupon-logo-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid #f5ffb0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.coupon-card-body {
+  padding: 12px 14px 10px;
+}
+
+.coupon-product {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.coupon-product span {
+  color: #ff5c8a;
+}
+
+.coupon-desc {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.coupon-code-box {
+  margin: 6px 0 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8f8f8;
+  border: 1px dashed #ccc;
+  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coupon-code-label {
+  font-size: 11px;
+  color: #777;
+}
+
+.coupon-code-value {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.coupon-barcode {
+  height: 32px;
+  margin: 4px 0 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    #111,
+    #111 2px,
+    #fff 2px,
+    #fff 4px
+  );
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.coupon-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #999;
+}
+
+.coupon-btn-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.coupon-btn {
+  flex: 1;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 7px 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.coupon-btn-primary {
+  background: #111;
+  color: #f5ffb0;
+}
+
+.coupon-btn-secondary {
+  background: #f3f3f3;
+  color: #444;
+  border: 1px solid #e0e0e0;
+}
+
     }
   </style>
 </head>
@@ -459,11 +619,10 @@
       <div class="brand-left">
         <img src="logo.jpg" alt="OLIVE YOUNG 로고" class="oy-logo" />
         <div class="brand-title-block">
-          <div class="brand-title">OLIVE YOUNG × colorgram 립 컬러 믹서</div>
-          <div class="brand-sub">기본 팔레트만으로 신상 립 컬러를 정확히 조합하면 교환권 기회!</div>
+          <div class="brand-title">OLIVE YOUNG × colorgram 신제품 프로모션 게임 이벤트!</div>
+          <div class="brand-sub">신상 립 컬러를 정확히 조색하면 실물 제품을 받을 수 있는 교환권 제공!</div>
         </div>
       </div>
-      <div class="oy-pill">OLIVE YOUNG PLAY</div>
     </div>
 
     <!-- 신상품 가상 틴트 정보 + 큰 썸네일 -->
@@ -474,24 +633,22 @@
       </div>
       <div class="product-copy">
         <div class="product-tagline">NEW · 올리브영 단독 선런칭</div>
-        <div class="product-name">colorgram <span>무드필터 글로우 틴트</span> · 01 올리브 핑크 필터</div>
+        <div class="product-name">colorgram <span>무드필터 글로우 틴트</span> </div>
         <div class="product-desc">
-          올리브빛이 살짝 감도는 핑크 MLBB. 내 입술 톤에 맞춰 자연스럽게 물드는 글로우 틴트 컬러를 직접 조합해 보세요.
+          혈색과 잘 어우러지는 톤다운 핑크 계열로 느좋 무드를 연출할 수 있는 틴트!
         </div>
         <div class="product-meta">
-          목표 립 컬러를 정확히 재현하면, 컬러그램 신제품 교환권을 받는다는 컨셉의 미니 게임입니다.
+          총 6가지의 컬러 옵션!
         </div>
       </div>
     </div>
 
     <div class="subtitle">
-      6가지 colorgram 가상 립 컬러 중 하나를 선택하고,<br />
-      화이트 · 블랙 · 레드 · 핑크 · 브라운 팔레트로 목표 컬러에 얼마나 가까워질 수 있는지 도전해보세요.
+      원하는 컬러 옵션을 선택후 게임을 시작해주세요!
     </div>
 
     <!-- 목표 컬러 선택 바 (옵션 선택 전용) -->
     <div class="shade-bar">
-      <div class="shade-bar-label">🎯 목표 립 컬러 선택</div>
       <div class="shade-list" id="shade-list"></div>
     </div>
 
@@ -499,7 +656,7 @@
       <!-- 목표 컬러 패널 (옵션 선택은 위 바에서, 여기엔 결과만 표시) -->
       <div class="panel">
         <div class="panel-header">
-          <span>선택된 목표 색상</span>
+          <span>목표 색상</span>
           <span class="panel-tag target">Target Shade</span>
         </div>
         <div class="swatch-row" style="margin-bottom: 4px;">
@@ -507,7 +664,6 @@
           <div>
             <div class="panel-text-main" id="target-name">색상을 선택해주세요</div>
             <div class="panel-text-sub" id="target-rgb">RGB(-, -, -)</div>
-            <div class="panel-small">위 바에서 목표 컬러를 선택하면 이 영역에 적용됩니다.</div>
           </div>
         </div>
       </div>
@@ -515,7 +671,7 @@
       <!-- 믹스 결과 패널 -->
       <div class="panel">
         <div class="panel-header">
-          <span>내가 만든 조합</span>
+          <span>내 팔레트</span>
           <span class="panel-tag mix">My Mix</span>
         </div>
         <div class="swatch-row">
@@ -535,8 +691,8 @@
     <!-- 팔레트 -->
     <div class="palette-panel">
       <div class="palette-header">
-        <span>🎨 기본 팔레트 – 버튼을 클릭하면 해당 색이 한 방울씩 추가됩니다.</span>
-        <span style="font-size:11px; color:#888;">섞을수록 한 방울의 영향력은 작아집니다.</span>
+        <span>컬러 목록</span>
+        <span style="font-size:11px; color:#888;">다양하게 조합하여 무드필터 글로우 틴트의 색상을 따라잡아 보세요!</span>
       </div>
       <div class="palette-grid" id="palette"></div>
     </div>
@@ -548,9 +704,7 @@
     </div>
 
     <div class="helper-text">
-      목표 색상과 현재 조합의 RGB가 얼마나 가까운지를 기준으로 유사도를 계산해요.
-      <br />
-      특정 기준 이상으로 가까워지면 가상의 “교환권 당첨” 배지를 띄울 수 있습니다.
+      
     </div>
 
     <!-- 결과 패널 -->
@@ -602,6 +756,45 @@
     const resultScoreEl = document.getElementById("result-score");
     const resultTextEl = document.getElementById("result-text");
     const resultNoteEl = document.getElementById("result-note");
+        const couponOverlay = document.getElementById("coupon-overlay");
+    const couponCodeEl = document.getElementById("coupon-code");
+    const couponDateEl = document.getElementById("coupon-date");
+    const couponCloseButtons = document.querySelectorAll("[data-close-coupon]");
+
+    function generateCouponCode() {
+      // 간단한 랜덤 코드 생성 (예: OYCG-XXXX-YYYY)
+      const rand = () => Math.floor(1000 + Math.random() * 9000);
+      return `OYCG-${rand()}-${rand()}`;
+    }
+
+    function showCoupon() {
+      couponCodeEl.textContent = generateCouponCode();
+
+      // 간단한 날짜 텍스트 (오늘 발급)
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      couponDateEl.textContent = `${y}.${m}.${d} 발급`;
+
+      couponOverlay.classList.add("visible");
+    }
+
+    function hideCoupon() {
+      couponOverlay.classList.remove("visible");
+    }
+
+    couponCloseButtons.forEach(btn => {
+      btn.addEventListener("click", hideCoupon);
+    });
+
+    // 오버레이 배경 클릭 시 닫기
+    couponOverlay.addEventListener("click", (e) => {
+      if (e.target === couponOverlay) {
+        hideCoupon();
+      }
+    });
+
 
     // === 상태 ===
     let selectedShade = null;
@@ -740,6 +933,7 @@
     }
 
     // === 결과 확인 ===
+        // === 결과 확인 ===
     function checkResult() {
       if (!selectedShade) {
         alert("먼저 목표 색상을 선택해주세요.");
@@ -758,14 +952,44 @@
       resultScoreEl.textContent = score + "%";
 
       // 교환권 기준 (예: 95% 이상이면 성공)
-      const success = score >= 98;
+      const success = score >= 95;
 
       if (success) {
         resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
         resultNoteEl.textContent =
           "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기서 교환권 코드 또는 마이쿠폰 지급 안내를 노출할 수 있습니다.";
+
+        // ✅ 교환권 쿠폰 오버레이 띄우기
+        showCoupon();
       } else {
         resultTextEl.innerHTML = `조금 더 미세 조정이 필요해요. <span class="badge-lose">아쉬운 실패</span>`;
+        resultNoteEl.textContent =
+          "화이트/블랙으로 명도를 조절하거나, 레드·핑크·브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
+
+        // 실패 시에는 쿠폰 숨김 보장
+        hideCoupon();
+      }
+
+      resultPanelEl.style.display = "block";
+    }
+
+
+      const dist = colorDistance(selectedShade.rgb, mixedColor);
+      const maxDist = Math.sqrt(255*255*3); // 이론상 최대 거리
+      let score = Math.round(100 - (dist / maxDist) * 100);
+      score = clamp(score, 0, 100);
+
+      resultScoreEl.textContent = score + "%";
+
+      // 교환권 기준 (예: 98% 이상이면 성공)
+      const success = score >= 98;
+
+      if (success) {
+        resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
+        resultNoteEl.textContent =
+          "실제 colorgram 무드필터 글로우 틴트와 거의 구분이 안 될 정도의 조합이에요.";
+      } else {
+        resultTextEl.innerHTML = `다시 도전해보세요 <span class="badge-lose">아쉬운 실패</span>`;
         resultNoteEl.textContent =
           "화이트/블랙으로 명도를 조절하거나, 레드·핑크·브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
       }
@@ -789,6 +1013,52 @@
 
     btnCheck.addEventListener("click", checkResult);
     btnReset.addEventListener("click", resetAll);
+    
   </script>
+    <!-- 가상 기프티콘 쿠폰 오버레이 -->
+  <div class="coupon-overlay" id="coupon-overlay">
+    <div class="coupon-card">
+      <div class="coupon-card-header">
+        <div class="coupon-card-header-left">
+          <span class="coupon-tag">GIFTICON · COLORGRAM</span>
+          <span class="coupon-title">무드필터 글로우 틴트 교환권</span>
+        </div>
+        <div class="coupon-logo-dot">OY</div>
+      </div>
+      <div class="coupon-card-body">
+        <div class="coupon-product">
+          OLIVE YOUNG × colorgram <span>무드필터 글로우 틴트</span>
+        </div>
+        <div class="coupon-desc">
+          선택하신 목표 립 컬러와 95% 이상 일치!<br />
+          실제 이벤트라면 이 화면을 기준으로 교환권이 지급됩니다.
+        </div>
+
+        <div class="coupon-code-box">
+          <div>
+            <div class="coupon-code-label">기프티콘 번호</div>
+            <div class="coupon-code-value" id="coupon-code">OYCG-0000-0000</div>
+          </div>
+        </div>
+
+        <div class="coupon-barcode"></div>
+
+        <div class="coupon-footer-row">
+          <span>발급처 · OLIVE YOUNG PLAY</span>
+          <span id="coupon-date">오늘 발급</span>
+        </div>
+
+        <div class="coupon-btn-row">
+          <button class="coupon-btn coupon-btn-primary" data-close-coupon>
+            쿠폰 저장하기
+          </button>
+          <button class="coupon-btn coupon-btn-secondary" data-close-coupon>
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
