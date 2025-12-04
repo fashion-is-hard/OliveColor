@@ -17,7 +17,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #f7f7f7;
+      background: #82DC28;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #222;
     }
@@ -27,7 +27,7 @@
       max-width: 100%;
       background: #ffffff;
       border-radius: 18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
       padding: 20px 22px 22px;
     }
 
@@ -82,7 +82,7 @@
     .subtitle {
       font-size: 13px;
       color: #555;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       line-height: 1.5;
     }
 
@@ -90,18 +90,18 @@
     .product-hero {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       border-radius: 14px;
       border: 1px solid #f0f0f0;
       background: #fcfcfc;
-      padding: 10px 12px;
-      margin-bottom: 16px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
     }
 
     .product-thumb-wrapper {
-      width: 72px;
-      height: 72px;          /* 1:1 비율 고정 */
-      border-radius: 14px;
+      width: 130px;
+      height: 130px;          /* 1:1 비율, 더 크게 */
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid #e0e0e0;
       background: #f3f3f3;
@@ -114,14 +114,14 @@
     .product-thumb-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;     /* 썸네일이 정사각형 채우도록 */
+      object-fit: cover;     /* 쇼핑 썸네일처럼 꽉 채우기 */
       display: block;
     }
 
     .product-copy {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
     }
 
     .product-tagline {
@@ -149,6 +149,55 @@
     .product-meta {
       font-size: 11px;
       color: #999;
+    }
+
+    /* 목표 컬러 선택 바 (옵션 선택 전용) */
+    .shade-bar {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .shade-bar-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      min-width: 120px;
+      padding-top: 2px;
+    }
+
+    .shade-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .shade-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      transition: box-shadow 0.1s ease, border-color 0.1s ease, background 0.1s ease;
+    }
+
+    .shade-chip-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .shade-chip.active {
+      border-color: #ff5c8a;
+      box-shadow: 0 0 0 2px rgba(255,92,138,0.25);
+      background: #fff5f8;
     }
 
     .layout-row {
@@ -227,40 +276,6 @@
       margin-top: 4px;
     }
 
-    /* 목표 컬러 선택 */
-    .shade-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .shade-chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid #ddd;
-      background: #fff;
-      font-size: 11px;
-      cursor: pointer;
-      transition: box-shadow 0.1s ease, border-color 0.1s ease, background 0.1s ease;
-    }
-
-    .shade-chip-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .shade-chip.active {
-      border-color: #ff5c8a;
-      box-shadow: 0 0 0 2px rgba(255,92,138,0.25);
-      background: #fff5f8;
-    }
-
     /* 팔레트 */
     .palette-panel {
       border-radius: 14px;
@@ -276,6 +291,8 @@
       font-size: 12px;
       margin-bottom: 8px;
       color: #555;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .palette-grid {
@@ -425,6 +442,13 @@
       .product-hero {
         align-items: flex-start;
       }
+      .product-thumb-wrapper {
+        width: 110px;
+        height: 110px;
+      }
+      .shade-bar-label {
+        min-width: 100px;
+      }
     }
   </style>
 </head>
@@ -433,7 +457,7 @@
     <!-- 상단 브랜드 & 로고 -->
     <div class="brand-bar">
       <div class="brand-left">
-        <img src="logo.png" alt="OLIVE YOUNG 로고" class="oy-logo" />
+        <img src="logo.jpg" alt="OLIVE YOUNG 로고" class="oy-logo" />
         <div class="brand-title-block">
           <div class="brand-title">OLIVE YOUNG × colorgram 립 컬러 믹서</div>
           <div class="brand-sub">기본 팔레트만으로 신상 립 컬러를 정확히 조합하면 교환권 기회!</div>
@@ -442,10 +466,10 @@
       <div class="oy-pill">OLIVE YOUNG PLAY</div>
     </div>
 
-    <!-- 신상품 가상 틴트 정보 + 썸네일 -->
+    <!-- 신상품 가상 틴트 정보 + 큰 썸네일 -->
     <div class="product-hero">
       <div class="product-thumb-wrapper">
-        <!-- 1:1 썸네일 -->
+        <!-- 1:1 쇼핑 썸네일 -->
         <img src="thumb.png" alt="colorgram 무드필터 글로우 틴트 썸네일" class="product-thumb-img" />
       </div>
       <div class="product-copy">
@@ -465,22 +489,27 @@
       화이트 · 블랙 · 레드 · 핑크 · 브라운 팔레트로 목표 컬러에 얼마나 가까워질 수 있는지 도전해보세요.
     </div>
 
+    <!-- 목표 컬러 선택 바 (옵션 선택 전용) -->
+    <div class="shade-bar">
+      <div class="shade-bar-label">🎯 목표 립 컬러 선택</div>
+      <div class="shade-list" id="shade-list"></div>
+    </div>
+
     <div class="layout-row">
-      <!-- 목표 컬러 패널 -->
+      <!-- 목표 컬러 패널 (옵션 선택은 위 바에서, 여기엔 결과만 표시) -->
       <div class="panel">
         <div class="panel-header">
-          <span>목표 색상 선택</span>
+          <span>선택된 목표 색상</span>
           <span class="panel-tag target">Target Shade</span>
         </div>
-        <div class="swatch-row" style="margin-bottom: 8px;">
+        <div class="swatch-row" style="margin-bottom: 4px;">
           <div class="swatch" id="target-swatch"></div>
           <div>
             <div class="panel-text-main" id="target-name">색상을 선택해주세요</div>
             <div class="panel-text-sub" id="target-rgb">RGB(-, -, -)</div>
-            <div class="panel-small">아래에서 6가지 컬러 옵션 중 하나를 선택하면 목표 색상으로 설정됩니다.</div>
+            <div class="panel-small">위 바에서 목표 컬러를 선택하면 이 영역에 적용됩니다.</div>
           </div>
         </div>
-        <div class="shade-list" id="shade-list"></div>
       </div>
 
       <!-- 믹스 결과 패널 -->
@@ -729,7 +758,7 @@
       resultScoreEl.textContent = score + "%";
 
       // 교환권 기준 (예: 95% 이상이면 성공)
-      const success = score >= 95;
+      const success = score >= 98;
 
       if (success) {
         resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
