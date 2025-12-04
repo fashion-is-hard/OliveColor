@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>colorgram 립 컬러 믹서 게임</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f7f7f7;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #222;
+    }
+
+    .game-root {
+      width: 820px;
+      max-width: 100%;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      padding: 20px 22px 22px;
+    }
+
+    .brand-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ececec;
+      padding-bottom: 8px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .oy-pill {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid #b2cf2f;
+      color: #6c7c00;
+      background: #f5ffd8;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .layout-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      flex: 1 1 340px;
+      border-radius: 14px;
+      border: 1px solid #ececec;
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .panel-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .panel-tag.target {
+      background: #f5ffd8;
+      color: #6c7c00;
+      border: 1px solid #cde000;
+    }
+
+    .panel-tag.mix {
+      background: #ffe7ec;
+      color: #b1384e;
+      border: 1px solid #ff9fb6;
+    }
+
+    .swatch-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      border: 2px solid #ddd;
+      background: #eee;
+    }
+
+    .panel-text-main {
+      font-size: 14px;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .panel-text-sub {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .panel-small {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    /* 목표 컬러 선택 */
+    .shade-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .shade-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      transition: box-shadow 0.1s ease, border-color 0.1s ease;
+    }
+
+    .shade-chip-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .shade-chip.active {
+      border-color: #cde000;
+      box-shadow: 0 0 0 2px rgba(205,224,0,0.3);
+    }
+
+    /* 팔레트 */
+    .palette-panel {
+      border-radius: 14px;
+      border: 1px solid #ececec;
+      padding: 12px;
+      background: #fcfcfc;
+      margin-bottom: 12px;
+    }
+
+    .palette-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .paint-btn {
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background: #eee;
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      transition: box-shadow 0.1s ease, transform 0.05s ease;
+    }
+
+    .paint-btn:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      transform: translateY(-1px);
+    }
+
+    .paint-color {
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .paint-label {
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .paint-count {
+      font-size: 10px;
+      color: #777;
+    }
+
+    /* 컨트롤 / 결과 */
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter 0.1s ease, transform 0.05s ease, box-shadow 0.1s ease;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: none;
+      filter: brightness(0.96);
+    }
+
+    .btn-primary {
+      flex: 2;
+      background: #cde000;
+      color: #222;
+      box-shadow: 0 6px 16px rgba(160, 180, 0, 0.4);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      background: #f3f3f3;
+      color: #555;
+      border: 1px solid #ddd;
+    }
+
+    .helper-text {
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+
+    .result-panel {
+      border-radius: 14px;
+      border: 1px solid #ececec;
+      padding: 10px 12px;
+      background: #fafafa;
+      font-size: 12px;
+      display: none;
+    }
+
+    .result-main {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .result-score {
+      font-size: 24px;
+      font-weight: 800;
+      color: #cde000;
+    }
+
+    .badge-win {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #111;
+      color: #f5ffb0;
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .badge-lose {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ffe5ec;
+      color: #b1384e;
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .game-root {
+        padding: 16px;
+      }
+      .layout-row {
+        flex-direction: column;
+      }
+      .palette-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-root">
+    <div class="brand-bar">
+      <div>
+        <div class="brand-title">OLIVE YOUNG × colorgram 립 컬러 믹서</div>
+        <div class="brand-sub">기본 팔레트만으로 신상 립 컬러를 정확히 조합해보면 교환권 기회!</div>
+      </div>
+      <div class="oy-pill">OLIVE YOUNG PLAY</div>
+    </div>
+
+    <div class="subtitle">
+      6가지 colorgram 가상 립 컬러 중 하나를 선택하고,<br />
+      화이트 · 블랙 · 레드 · 핑크 · 브라운 팔레트로 목표 컬러에 얼마나 가까워질 수 있는지 도전해보세요.
+    </div>
+
+    <div class="layout-row">
+      <!-- 목표 컬러 패널 -->
+      <div class="panel">
+        <div class="panel-header">
+          <span>목표 색상 선택</span>
+          <span class="panel-tag target">Target Shade</span>
+        </div>
+        <div class="swatch-row" style="margin-bottom: 8px;">
+          <div class="swatch" id="target-swatch"></div>
+          <div>
+            <div class="panel-text-main" id="target-name">색상을 선택해주세요</div>
+            <div class="panel-text-sub" id="target-rgb">RGB(-, -, -)</div>
+            <div class="panel-small">아래에서 6가지 컬러 옵션 중 하나를 선택하면 목표 색상으로 설정됩니다.</div>
+          </div>
+        </div>
+        <div class="shade-list" id="shade-list"></div>
+      </div>
+
+      <!-- 믹스 결과 패널 -->
+      <div class="panel">
+        <div class="panel-header">
+          <span>내가 만든 조합</span>
+          <span class="panel-tag mix">My Mix</span>
+        </div>
+        <div class="swatch-row">
+          <div class="swatch" id="mix-swatch"></div>
+          <div>
+            <div class="panel-text-main" id="mix-label">아직 어떤 색도 섞지 않았어요</div>
+            <div class="panel-text-sub" id="mix-rgb">RGB(0, 0, 0)</div>
+            <div class="panel-small">
+              사용한 방울 수:
+              <span id="drop-count">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 팔레트 -->
+    <div class="palette-panel">
+      <div class="palette-header">
+        <span>🎨 기본 팔레트 – 버튼을 클릭하면 해당 색이 한 방울씩 추가됩니다.</span>
+        <span style="font-size:11px; color:#888;">섞을수록 한 방울의 영향력은 작아집니다.</span>
+      </div>
+      <div class="palette-grid" id="palette"></div>
+    </div>
+
+    <!-- 컨트롤 -->
+    <div class="controls">
+      <button class="btn-primary" id="btn-check">결과 확인</button>
+      <button class="btn-secondary" id="btn-reset">다시 하기</button>
+    </div>
+
+    <div class="helper-text">
+      목표 색상과 현재 조합의 RGB가 얼마나 가까운지를 기준으로 유사도를 계산해요.
+      <br />
+      특정 기준 이상으로 가까워지면 가상의 “교환권 당첨” 배지를 띄울 수 있습니다.
+    </div>
+
+    <!-- 결과 패널 -->
+    <div class="result-panel" id="result-panel">
+      <div class="result-main">
+        <div class="result-score" id="result-score">0%</div>
+        <div id="result-text">아직 결과를 확인하지 않았어요.</div>
+      </div>
+      <div id="result-note"></div>
+    </div>
+  </div>
+
+  <script>
+    // === 1. 목표 립 컬러 6가지 ===
+    const SHADES = [
+      { id: "mlbb_rose", name: "01 MLBB 로즈", rgb: [194, 91, 99] },   // 로즈 MLBB
+      { id: "coral_punch", name: "02 코랄 펀치", rgb: [255, 112, 98] }, // 코랄
+      { id: "brick_mauve", name: "03 브릭 모브", rgb: [162, 80, 82] },
+      { id: "nude_beige", name: "04 누드 베이지", rgb: [203, 152, 120] },
+      { id: "cherry_red", name: "05 체리 레드", rgb: [210, 40, 60] },
+      { id: "dry_rose", name: "06 말린 장미", rgb: [175, 102, 108] }
+    ];
+
+    // === 2. 기본 팔레트 (화이트/블랙/레드/핑크/브라운) ===
+    const PALETTE = [
+      { id: "white", name: "소프트 화이트", rgb: [250, 250, 250] },
+      { id: "black", name: "딥 블랙", rgb: [10, 10, 10] },
+      { id: "red", name: "클래식 레드", rgb: [220, 45, 60] },
+      { id: "pink", name: "소프트 핑크", rgb: [250, 140, 160] },
+      { id: "brown", name: "코코아 브라운", rgb: [120, 70, 50] }
+    ];
+
+    // === DOM 참조 ===
+    const shadeListEl = document.getElementById("shade-list");
+    const targetSwatchEl = document.getElementById("target-swatch");
+    const targetNameEl = document.getElementById("target-name");
+    const targetRgbEl = document.getElementById("target-rgb");
+
+    const mixSwatchEl = document.getElementById("mix-swatch");
+    const mixLabelEl = document.getElementById("mix-label");
+    const mixRgbEl = document.getElementById("mix-rgb");
+    const dropCountEl = document.getElementById("drop-count");
+
+    const paletteEl = document.getElementById("palette");
+    const btnCheck = document.getElementById("btn-check");
+    const btnReset = document.getElementById("btn-reset");
+
+    const resultPanelEl = document.getElementById("result-panel");
+    const resultScoreEl = document.getElementById("result-score");
+    const resultTextEl = document.getElementById("result-text");
+    const resultNoteEl = document.getElementById("result-note");
+
+    // === 상태 ===
+    let selectedShade = null;
+    let drops = []; // { rgb, paletteId }
+    let mixedColor = [0,0,0];
+
+    // === 유틸 ===
+    const rgbCss = ([r,g,b]) => `rgb(${r}, ${g}, ${b})`;
+    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+
+    function colorDistance(c1, c2) {
+      const dr = c1[0]-c2[0];
+      const dg = c1[1]-c2[1];
+      const db = c1[2]-c2[2];
+      return Math.sqrt(dr*dr + dg*dg + db*db);
+    }
+
+    // === 목표 색상 렌더링 ===
+    function renderShadeOptions() {
+      shadeListEl.innerHTML = "";
+      SHADES.forEach(shade => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "shade-chip";
+
+        const dot = document.createElement("div");
+        dot.className = "shade-chip-dot";
+        dot.style.backgroundColor = rgbCss(shade.rgb);
+
+        const label = document.createElement("span");
+        label.textContent = shade.name;
+
+        chip.appendChild(dot);
+        chip.appendChild(label);
+
+        chip.addEventListener("click", () => selectShade(shade.id));
+
+        shadeListEl.appendChild(chip);
+      });
+    }
+
+    function selectShade(shadeId) {
+      selectedShade = SHADES.find(s => s.id === shadeId);
+      if (!selectedShade) return;
+
+      // 비주얼 업데이트
+      targetSwatchEl.style.backgroundColor = rgbCss(selectedShade.rgb);
+      targetNameEl.textContent = selectedShade.name;
+      targetRgbEl.textContent = `RGB(${selectedShade.rgb[0]}, ${selectedShade.rgb[1]}, ${selectedShade.rgb[2]})`;
+
+      // active 스타일
+      Array.from(shadeListEl.children).forEach((chip, index) => {
+        const shade = SHADES[index];
+        if (shade.id === shadeId) chip.classList.add("active");
+        else chip.classList.remove("active");
+      });
+
+      // 결과 패널 리셋
+      resultPanelEl.style.display = "none";
+    }
+
+    // === 팔레트 렌더링 ===
+    function renderPalette() {
+      paletteEl.innerHTML = "";
+      const usage = {};
+      PALETTE.forEach(p => usage[p.id] = 0);
+      drops.forEach(d => usage[d.paletteId]++);
+
+      PALETTE.forEach(color => {
+        const btn = document.createElement("div");
+        btn.className = "paint-btn";
+
+        const colorBox = document.createElement("div");
+        colorBox.className = "paint-color";
+        colorBox.style.backgroundColor = rgbCss(color.rgb);
+
+        const label = document.createElement("div");
+        label.className = "paint-label";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = color.name;
+
+        const countSpan = document.createElement("span");
+        countSpan.className = "paint-count";
+        const count = usage[color.id] || 0;
+        countSpan.textContent = count > 0 ? `${count}방울` : "";
+
+        label.appendChild(nameSpan);
+        label.appendChild(countSpan);
+
+        btn.appendChild(colorBox);
+        btn.appendChild(label);
+
+        btn.addEventListener("click", () => {
+          addDrop(color);
+        });
+
+        paletteEl.appendChild(btn);
+      });
+    }
+
+    function addDrop(color) {
+      drops.push({ rgb: color.rgb.slice(), paletteId: color.id });
+      recalcMixedColor();
+      renderPalette();
+      resultPanelEl.style.display = "none";
+    }
+
+    // === 믹스 색 계산 ===
+    function recalcMixedColor() {
+      if (drops.length === 0) {
+        mixedColor = [0,0,0];
+      } else {
+        let r=0,g=0,b=0;
+        drops.forEach(d => {
+          r += d.rgb[0];
+          g += d.rgb[1];
+          b += d.rgb[2];
+        });
+        mixedColor = [
+          Math.round(r / drops.length),
+          Math.round(g / drops.length),
+          Math.round(b / drops.length),
+        ];
+      }
+      updateMixView();
+    }
+
+    function updateMixView() {
+      mixSwatchEl.style.backgroundColor = rgbCss(mixedColor);
+      mixRgbEl.textContent = `RGB(${mixedColor[0]}, ${mixedColor[1]}, ${mixedColor[2]})`;
+      dropCountEl.textContent = drops.length.toString();
+
+      if (drops.length === 0) {
+        mixLabelEl.textContent = "아직 어떤 색도 섞지 않았어요";
+      } else {
+        mixLabelEl.textContent = `총 ${drops.length}방울을 섞었습니다`;
+      }
+    }
+
+    // === 결과 확인 ===
+    function checkResult() {
+      if (!selectedShade) {
+        alert("먼저 목표 색상을 선택해주세요.");
+        return;
+      }
+      if (drops.length === 0) {
+        alert("먼저 팔레트에서 색을 섞어보세요.");
+        return;
+      }
+
+      const dist = colorDistance(selectedShade.rgb, mixedColor);
+      const maxDist = Math.sqrt(255*255*3); // 이론상 최대 거리
+      let score = Math.round(100 - (dist / maxDist) * 100);
+      score = clamp(score, 0, 100);
+
+      resultScoreEl.textContent = score + "%";
+
+      // 교환권 기준 (예: 95% 이상이면 성공)
+      const success = score >= 95;
+
+      if (success) {
+        resultTextEl.innerHTML = `색감 일치! <span class="badge-win">교환권 당첨</span>`;
+        resultNoteEl.textContent =
+          "실제 컬러그램 립과 거의 구분이 안 될 정도의 조합이에요. 이벤트라면 여기에 교환권 코드 또는 팝업을 띄울 수 있습니다.";
+      } else {
+        resultTextEl.innerHTML = `조금 더 미세 조정이 필요해요. <span class="badge-lose">아쉬운 실패</span>`;
+        resultNoteEl.textContent =
+          "화이트나 블랙으로 명도를 조절하거나, 레드/핑크/브라운 비율을 살짝 바꿔서 다시 도전해보세요.";
+      }
+
+      resultPanelEl.style.display = "block";
+    }
+
+    // === 리셋 ===
+    function resetAll() {
+      drops = [];
+      mixedColor = [0,0,0];
+      recalcMixedColor();
+      renderPalette();
+      resultPanelEl.style.display = "none";
+      // 목표 색상은 유지 (원한다면 여기서도 초기화 가능)
+    }
+
+    // === 초기 실행 ===
+    renderShadeOptions();
+    renderPalette();
+    recalcMixedColor();
+
+    btnCheck.addEventListener("click", checkResult);
+    btnReset.addEventListener("click", resetAll);
+  </script>
+</body>
+</html>
